@@ -1,6 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
 
-import { EVENT_BADGE } from './events.js';
+import { EVENT_BADGE, EVENT_NONE } from './events.js';
 
 export const INPUT_MESSAGE = Object.freeze({
   VISIT_DATE: `12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)\n`,
@@ -34,7 +34,7 @@ export const OUTPUT_MESSAGE = Object.freeze({
       return EVENT_BADGE.STAR;
     }
 
-    return EVENT_BADGE.NONE;
+    return EVENT_NONE;
   },
   RESULT_DETAILS: {
     // orders = [ food1-count, food2-count, ... ];
