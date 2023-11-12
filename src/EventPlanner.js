@@ -27,6 +27,17 @@ class EventPlanner {
 
     this.events = events || [];
   }
+
+  getDayType() {
+    const currentDate = new Date(`2023-12-${this.visitDate}`);
+    const currentDay = currentDate.getDay();
+
+    if (EVENTS['WEEKEND'].DAY.includes(currentDay)) {
+      return EVENTS['WEEKEND'].NAME;
+    }
+
+    return EVENTS['WEEKDAY'].NAME;
+  }
 }
 
 export default EventPlanner;
