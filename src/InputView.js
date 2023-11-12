@@ -1,6 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
 
-import { INPUT_MESSAGE } from './constants/messages';
+import { INPUT_MESSAGE } from './constants/messages.js';
 
 const InputView = {
   async readDate() {
@@ -10,7 +10,7 @@ const InputView = {
 
   async readOrder() {
     const orders = await Console.readLineAsync(INPUT_MESSAGE.MENU_TO_ORDER);
-    return orders;
+    return orders.split(',');
   },
 };
 
