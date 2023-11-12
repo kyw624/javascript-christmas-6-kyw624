@@ -1,10 +1,10 @@
-import { CATEGORYS } from './menu';
+import { CATEGORYS } from './menu.js';
 
 export const DAYS = ['일', '월', '화', '수', '목', '금', '토'];
 
 export const EVENT_NONE = '없음';
 
-export const EVENTS = {
+export const EVENTS = Object.freeze({
   'D-DAY': {
     DEFAULT: 1000,
     MIN: 1,
@@ -21,10 +21,10 @@ export const EVENTS = {
     DISCOUNT: 2023,
   },
   SPECIAL: [3, 10, 17, 24, 25, 31],
-};
+});
 
-export const EVENT_BADGE = {
+export const EVENT_BADGE = Object.freeze({
   STAR: '별',
   TREE: '트리',
   SANTA: '산타',
-};
+});

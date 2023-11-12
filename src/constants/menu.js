@@ -1,11 +1,11 @@
-export const CATEGORYS = {
+export const CATEGORYS = Object.freeze({
   APPETIZER: '애피타이저',
   MAIN: '메인',
   DESSERT: '디저트',
   DRINK: '음료',
-};
+});
 
-export const FOODS = {
+export const FOODS = Object.freeze({
   MUSHROOM_SOUP: '양송이수프',
   TAPAS: '타파스',
   CAESAR_SALAD: '시저샐러드',
@@ -21,9 +21,9 @@ export const FOODS = {
   ZERO_COKE: '제로콜라',
   RED_WINE: '레드와인',
   CHAMPAGNE: '샴페인',
-};
+});
 
-export const PRICES = {
+export const PRICES = Object.freeze({
   [FOODS.MUSHROOM_SOUP]: 6000,
   [FOODS.TAPAS]: 5500,
   [FOODS.CAESAR_SALAD]: 8000,
@@ -39,9 +39,9 @@ export const PRICES = {
   [FOODS.ZERO_COKE]: 3000,
   [FOODS.RED_WINE]: 60000,
   [FOODS.CHAMPAGNE]: 25000,
-};
+});
 
-export const MENU = {
+export const MENU = Object.freeze({
   [CATEGORYS.APPETIZER]: {
     [FOODS.MUSHROOM_SOUP]: PRICES.MUSHROOM_SOUP,
     [FOODS.TAPAS]: PRICES.TAPAS,
@@ -59,4 +59,4 @@ export const MENU = {
     [FOODS.RED_WINE]: PRICES.RED_WINE,
     [FOODS.CHAMPAGNE]: PRICES.CHAMPAGNE,
   },
-};
+});
