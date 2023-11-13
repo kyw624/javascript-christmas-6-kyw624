@@ -1,4 +1,4 @@
-import { CATEGORYS } from './menu.js';
+import { CATEGORIES } from './menu.js';
 
 export const DAYS = ['일', '월', '화', '수', '목', '금', '토'];
 
@@ -14,13 +14,13 @@ export const EVENTS = Object.freeze({
   WEEKDAY: {
     NAME: 'WEEKDAY',
     DAY: [0, 1, 2, 3, 4],
-    TARGET: CATEGORYS.DESSERT,
+    TARGET: CATEGORIES.DESSERT,
     DISCOUNT: 2023,
   },
   WEEKEND: {
     NAME: 'WEEKEND',
     DAY: [5, 6],
-    TARGET: CATEGORYS.MAIN,
+    TARGET: CATEGORIES.MAIN,
     DISCOUNT: 2023,
   },
   SPECIAL: {
