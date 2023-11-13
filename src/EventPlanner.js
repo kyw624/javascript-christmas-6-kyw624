@@ -80,9 +80,14 @@ class EventPlanner {
     if (totalAmount >= 120000) {
       this.benefits['GIFT'] = {
         message: '증정 이벤트: -',
-        price: MENU['샴페인'],
+        price: MENU['샴페인'].price,
       };
     }
+  }
+
+  getTotalBenefits() {
+    const benefits = Object.values(this.benefits);
+    return benefits.reduce((total, { _, price }) => total + price, 0);
   }
 
   getBadge() {
