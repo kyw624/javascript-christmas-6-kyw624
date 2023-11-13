@@ -1,4 +1,4 @@
-import { EVENTS } from './constants/events.js';
+import { EVENTS, EVENT_BADGE, EVENT_NONE } from './constants/events.js';
 import { MENU } from './constants/menu.js';
 
 class EventPlanner {
@@ -7,6 +7,7 @@ class EventPlanner {
     this.orderList = menu;
     this.events = null;
     this.benefits = {};
+    this.eventBadge = null;
   }
 
   getEventsByDate() {
@@ -91,7 +92,21 @@ class EventPlanner {
   }
 
   getBadge() {
-    // 이벤트 뱃지
+    const totalBenefits = this.getTotalBenefits();
+
+    this.eventBadge = EVENT_NONE;
+
+    if (totalBenefits >= 5000) {
+      this.eventBadge = EVENT_BADGE['STAR'];
+    }
+
+    if (totalBenefits >= 10000) {
+      this.eventBadge = EVENT_BADGE['TREE'];
+    }
+
+    if (totalBenefits >= 20000) {
+      this.eventBadge = EVENT_BADGE['SANTA'];
+    }
   }
 }
 
