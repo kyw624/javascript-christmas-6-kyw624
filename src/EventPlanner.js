@@ -1,4 +1,5 @@
-import { EVENTS } from './constants/events';
+import { EVENTS } from './constants/events.js';
+import { MENU } from './constants/menu.js';
 
 class EventPlanner {
   constructor(date, menu) {
@@ -13,16 +14,13 @@ class EventPlanner {
 
     if (this.visitDate <= EVENTS['D-DAY'].MAX) {
       events.push(EVENTS['D-DAY'].NAME);
-      this.getDiscountByEvent(EVENTS['D-DAY'].NAME);
     }
 
     const dayType = this.getDayType();
     events.push(EVENTS[dayType].NAME);
-    this.getDiscountByEvent(EVENTS[dayType].NAME);
 
     if (EVENTS['SPECIAL'].DATE.includes(this.visitDate)) {
       events.push(EVENTS['SPECIAL'].NAME);
-      this.getDiscountByEvent(EVENTS['SPECIAL'].NAME);
     }
 
     this.events = events || [];
@@ -37,6 +35,26 @@ class EventPlanner {
     }
 
     return EVENTS['WEEKDAY'].NAME;
+  }
+
+  discountDday() {
+    // 디데이 할인
+  }
+
+  discountWeekly(dayType) {
+    // 주간 할인 (주중 or 주말)
+  }
+
+  discountSpecialDate() {
+    // 특별 할인
+  }
+
+  checkGiftEvent() {
+    // 증정 이벤트
+  }
+
+  getBadge() {
+    // 이벤트 뱃지
   }
 }
 
