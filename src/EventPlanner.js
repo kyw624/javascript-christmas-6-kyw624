@@ -19,6 +19,7 @@ class EventPlanner {
 
     const dayType = this.getDayType();
     events.push(EVENTS[dayType].NAME);
+    this.discountWeekly(dayType);
 
     if (EVENTS['SPECIAL'].DATE.includes(this.visitDate)) {
       events.push(EVENTS['SPECIAL'].NAME);
@@ -46,7 +47,21 @@ class EventPlanner {
   }
 
   discountWeekly(dayType) {
-    // 주간 할인 (주중 or 주말)
+    const prefix = dayType === 'WEEKDAY' ? '평일' : '주말';
+    const discountedCategory = EVENTS[dayType].TARGET;
+    const discountedCount = this.orderList.reduce((total, order) => {
+      const [food, count] = order.split('-');
+
+      if (MENU[food].category === discountedCategory) {
+        return total + Number(count);
+      }
+      return total;
+    }, 0);
+
+    this.benefits[dayType] = {
+      message: `${prefix} 할인: -`,
+      price: discountedCount * 2023,
+    };
   }
 
   discountSpecialDate() {
