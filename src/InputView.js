@@ -5,7 +5,7 @@ import { INPUT_MESSAGE } from './constants/messages.js';
 const InputView = {
   async readDate() {
     const visitDate = await Console.readLineAsync(INPUT_MESSAGE.VISIT_DATE);
-    return visitDate;
+    return Number(visitDate);
   },
 
   async readOrder() {
