@@ -59,6 +59,10 @@ class EventPlanner {
       return total;
     }, 0);
 
+    if (discountedCount === 0) {
+      return;
+    }
+
     this.benefits[dayType] = {
       message: `${prefix} 할인: -`,
       price: discountedCount * 2023,
@@ -66,15 +70,10 @@ class EventPlanner {
   }
 
   discountSpecialDate() {
-    // 특별 할인
     this.benefits['SPECIAL'] = {
       message: '특별 할인: -',
       price: 1000,
     };
-  }
-
-  checkGiftEvent() {
-    // 증정 이벤트
   }
 
   getBadge() {
