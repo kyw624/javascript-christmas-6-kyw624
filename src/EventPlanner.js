@@ -23,6 +23,7 @@ class EventPlanner {
 
     if (EVENTS['SPECIAL'].DATE.includes(this.visitDate)) {
       events.push(EVENTS['SPECIAL'].NAME);
+      this.discountSpecialDate();
     }
 
     this.events = events || [];
@@ -66,6 +67,10 @@ class EventPlanner {
 
   discountSpecialDate() {
     // 특별 할인
+    this.benefits['SPECIAL'] = {
+      message: '특별 할인: -',
+      price: 1000,
+    };
   }
 
   checkGiftEvent() {
