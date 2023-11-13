@@ -76,6 +76,15 @@ class EventPlanner {
     };
   }
 
+  checkGiftEvent(totalAmount) {
+    if (totalAmount >= 120000) {
+      this.benefits['GIFT'] = {
+        message: '증정 이벤트: -',
+        price: MENU['샴페인'],
+      };
+    }
+  }
+
   getBadge() {
     // 이벤트 뱃지
   }
