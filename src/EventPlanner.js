@@ -14,6 +14,7 @@ class EventPlanner {
 
     if (this.visitDate <= EVENTS['D-DAY'].MAX) {
       events.push(EVENTS['D-DAY'].NAME);
+      this.discountDday();
     }
 
     const dayType = this.getDayType();
@@ -38,7 +39,10 @@ class EventPlanner {
   }
 
   discountDday() {
-    // 디데이 할인
+    this.benefits['D-DAY'] = {
+      message: '크리스마스 디데이 할인: -',
+      price: EVENTS['D-DAY'].DEFAULT + (this.visitDate - 1) * 100,
+    };
   }
 
   discountWeekly(dayType) {
