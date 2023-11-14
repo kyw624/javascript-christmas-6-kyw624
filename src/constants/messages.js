@@ -12,16 +12,6 @@ export const INPUT_MESSAGE = Object.freeze({
     LINE_SEPARATOR,
 });
 
-export const RESULT_LIST = [
-  'ORDER_LIST',
-  'TOTAL_ORDER_AMOUNT',
-  'GIFT_MENU',
-  'BENEFITS',
-  'TOTAL_BENEFIT_AMOUNT',
-  'AMOUNT_AFTER_DISCOUNT',
-  'EVENT_BADGE',
-];
-
 export const OUTPUT_MESSAGE = Object.freeze({
   GREETING: `안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.`,
   BENEFIT_PREVIEW: (date) =>
