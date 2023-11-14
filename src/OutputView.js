@@ -6,6 +6,18 @@ import { MENU } from './constants/menu.js';
 import { OUTPUT_MESSAGE } from './constants/messages.js';
 
 const OutputView = {
+  printResultDetails(orderInstance, plannerInstance) {
+    this.printMenu(orderInstance.orders);
+    this.printBeforeDiscountTotalAmount(
+      orderInstance.getBeforeDiscountTotalAmount()
+    );
+    this.printGift(plannerInstance.getIsGift());
+    this.printBenefitsList(plannerInstance.getBenefitsList());
+    this.printTotalDiscountAmount(orderInstance.getTotalDiscountAmount());
+    this.printFinalPaymentAmount(orderInstance.getFinalPaymentAmount());
+    this.printEventBadge(plannerInstance.eventBadge);
+  },
+
   printGreeting() {
     Console.print(OUTPUT_MESSAGE.GREETING);
   },

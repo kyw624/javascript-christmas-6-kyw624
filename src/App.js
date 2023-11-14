@@ -6,42 +6,18 @@ import InputView from './InputView.js';
 import OutputView from './OutputView.js';
 import { OUTPUT_MESSAGE } from './constants/messages.js';
 
-const {
-  printGreeting,
-  printPreviewTitle,
-  printMenu,
-  printBeforeDiscountTotalAmount,
-  printGift,
-  printBenefitsList,
-  printTotalDiscountAmount,
-  printFinalPaymentAmount,
-  printEventBadge,
-} = OutputView;
-
 class App {
   async run() {
-    printGreeting();
+    OutputView.printGreeting();
     const visitDate = await InputView.readDate();
     const orderList = await InputView.readOrder();
-    printPreviewTitle(visitDate);
+    OutputView.printPreviewTitle(visitDate);
 
     const order = new Order(orderList);
     const eventPlanner = new EventPlanner(visitDate, orderList);
     eventPlanner.applyAllEvents(order);
 
-    this.printResultDetails(order, eventPlanner);
-  }
-
-  printResultDetails(orderInstance, plannerInstance) {
-    printMenu(orderInstance.orders);
-    printBeforeDiscountTotalAmount(
-      orderInstance.getBeforeDiscountTotalAmount()
-    );
-    printGift(plannerInstance.getIsGift());
-    printBenefitsList(plannerInstance.getBenefitsList());
-    printTotalDiscountAmount(orderInstance.getTotalDiscountAmount());
-    printFinalPaymentAmount(orderInstance.getFinalPaymentAmount());
-    printEventBadge(plannerInstance.eventBadge);
+    OutputView.printResultDetails(order, eventPlanner);
   }
 }
 
