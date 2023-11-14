@@ -27,7 +27,6 @@ class App {
 
     const order = new Order(orderList);
     order.getbeforeDiscountTotalAmount();
-    console.log(order.getOrderList());
 
     const eventPlanner = new EventPlanner(visitDate, orderList);
     eventPlanner.getEventsByDate();
