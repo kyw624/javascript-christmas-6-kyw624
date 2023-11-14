@@ -86,13 +86,13 @@ class EventPlanner {
     }
   }
 
-  getTotalBenefits() {
+  getTotalDiscountAmount() {
     const benefits = Object.values(this.benefits);
     return benefits.reduce((total, { _, price }) => total + price, 0);
   }
 
   getBadge() {
-    const totalBenefits = this.getTotalBenefits();
+    const totalBenefits = this.getTotalDiscountAmount();
 
     this.eventBadge = EVENT_NONE;
 

@@ -11,8 +11,8 @@ const {
   printBeforeDiscountTotalAmount,
   printGift,
   printBenefitsList,
-  printTotalBenefits,
-  printAmountAfterDiscount,
+  printTotalDiscountAmount,
+  printFinalPaymentAmount,
   printEventBadge,
 } = OutputView;
 
@@ -41,8 +41,8 @@ class App {
     printBeforeDiscountTotalAmount(orderInstance.beforeDiscountTotalAmount);
     printGift(plannerInstance);
     printBenefitsList(plannerInstance);
-    printTotalBenefits(plannerInstance);
-    printAmountAfterDiscount(orderInstance, plannerInstance);
+    printTotalDiscountAmount(plannerInstance);
+    printFinalPaymentAmount(orderInstance, plannerInstance);
     printEventBadge(plannerInstance);
   }
 }

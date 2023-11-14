@@ -10,8 +10,8 @@ const {
   BEFORE_DISCOUNT_TOTAL_AMOUNT,
   GIFT_MENU,
   BENEFITS_LIST,
-  TOTAL_BENEFIT_AMOUNT,
-  AMOUNT_AFTER_DISCOUNT,
+  TOTAL_DISCOUNT_AMOUNT,
+  FINAL_PAYMENT_AMOUNT,
   EVENT_BADGE,
 } = OUTPUT_MESSAGE.RESULT_DETAILS;
 
@@ -54,28 +54,29 @@ const OutputView = {
     Console.print(BENEFITS_LIST + benefitsResult);
   },
 
-  printTotalBenefits(plannerInstance) {
+  printTotalDiscountAmount(plannerInstance) {
     const benefits = Object.values(plannerInstance.benefits);
     const isBenefits = benefits.length ? true : false;
-    const totalBenefitsResult = plannerInstance.getTotalBenefits();
+    const totalBenefitsResult = plannerInstance.getTotalDiscountAmount();
     const prefix = isBenefits ? '' : '-';
 
     Console.print(
-      TOTAL_BENEFIT_AMOUNT +
+      TOTAL_DISCOUNT_AMOUNT +
         `${prefix}${totalBenefitsResult.toLocaleString()}원`
     );
   },
 
-  printAmountAfterDiscount(orderInstance, plannerInstance) {
+  printFinalPaymentAmount(orderInstance, plannerInstance) {
     const benefits = Object.values(plannerInstance.benefits);
     const isBenefits = benefits.length ? true : false;
     const totalBenefits = isBenefits
-      ? plannerInstance.getTotalBenefits() - MENU['샴페인'].price
+      ? plannerInstance.getTotalDiscountAmount() - MENU['샴페인'].price
       : 0;
+
     const totalAmount = orderInstance.beforeDiscountTotalAmount;
     const resultAmount = `${(totalAmount - totalBenefits).toLocaleString()}원`;
 
-    Console.print(AMOUNT_AFTER_DISCOUNT + resultAmount);
+    Console.print(FINAL_PAYMENT_AMOUNT + resultAmount);
   },
 
   printEventBadge(plannerInstance) {
