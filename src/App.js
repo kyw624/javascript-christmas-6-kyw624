@@ -8,7 +8,7 @@ import { OUTPUT_MESSAGE } from './constants/messages.js';
 
 const {
   printMenu,
-  printTotalOrderAmount,
+  printBeforeDiscountTotalAmount,
   printGift,
   printBenefitsList,
   printTotalBenefits,
@@ -38,7 +38,7 @@ class App {
 
   printResultDetails(orderInstance, plannerInstance) {
     printMenu(orderInstance.orders);
-    printTotalOrderAmount(orderInstance.beforeDiscountTotalAmount);
+    printBeforeDiscountTotalAmount(orderInstance.beforeDiscountTotalAmount);
     printGift(plannerInstance);
     printBenefitsList(plannerInstance);
     printTotalBenefits(plannerInstance);

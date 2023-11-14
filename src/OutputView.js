@@ -7,7 +7,7 @@ import { OUTPUT_MESSAGE } from './constants/messages.js';
 
 const {
   ORDER_LIST,
-  TOTAL_ORDER_AMOUNT,
+  BEFORE_DISCOUNT_TOTAL_AMOUNT,
   GIFT_MENU,
   BENEFITS_LIST,
   TOTAL_BENEFIT_AMOUNT,
@@ -27,8 +27,10 @@ const OutputView = {
     Console.print(ORDER_LIST + menuResult);
   },
 
-  printTotalOrderAmount(totalAmount) {
-    Console.print(TOTAL_ORDER_AMOUNT + `${totalAmount.toLocaleString()}원`);
+  printBeforeDiscountTotalAmount(totalAmount) {
+    Console.print(
+      BEFORE_DISCOUNT_TOTAL_AMOUNT + `${totalAmount.toLocaleString()}원`
+    );
   },
 
   printGift(plannerInstance) {
