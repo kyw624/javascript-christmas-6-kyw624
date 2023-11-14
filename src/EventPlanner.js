@@ -13,9 +13,18 @@ class EventPlanner {
     this.eventBadge = null;
   }
 
+  getIsAppliedEvents() {
+    return this.events === null ? false : true;
+  }
+
   applyAllEvents(orderInstance) {
-    this.getEventsByDate();
     orderInstance.calculateBeforeDiscountTotalAmount();
+
+    if (orderInstance.getBeforeDiscountTotalAmount() < 10000) {
+      return;
+    }
+
+    this.getEventsByDate();
 
     this.checkGiftEvent(orderInstance.beforeDiscountTotalAmount);
     orderInstance.calculateTotalDiscountAmount(this.benefits);

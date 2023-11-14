@@ -14,8 +14,14 @@ const OutputView = {
     this.printGift(plannerInstance.getIsGift());
     this.printBenefitsList(plannerInstance.getBenefitsList());
     this.printTotalDiscountAmount(orderInstance.getTotalDiscountAmount());
-    this.printFinalPaymentAmount(orderInstance.getFinalPaymentAmount());
-    this.printEventBadge(plannerInstance.eventBadge);
+
+    const isAppliedEvents = plannerInstance.getIsAppliedEvents();
+    const finalPaymentAmount = isAppliedEvents
+      ? orderInstance.getFinalPaymentAmount()
+      : orderInstance.getBeforeDiscountTotalAmount();
+    this.printFinalPaymentAmount(finalPaymentAmount);
+
+    this.printEventBadge(EVENT_NONE || plannerInstance.eventBadge);
   },
 
   printGreeting() {
