@@ -8,7 +8,7 @@ import { OUTPUT_MESSAGE } from './constants/messages.js';
 
 const {
   printGreeting,
-  printPreviewDetails,
+  printPreviewTitle,
   printMenu,
   printBeforeDiscountTotalAmount,
   printGift,
@@ -23,7 +23,7 @@ class App {
     printGreeting();
     const visitDate = await InputView.readDate();
     const orderList = await InputView.readOrder();
-    printPreviewDetails(visitDate);
+    printPreviewTitle(visitDate);
 
     const order = new Order(orderList);
     const eventPlanner = new EventPlanner(visitDate, orderList);

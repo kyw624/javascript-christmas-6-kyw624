@@ -10,7 +10,7 @@ const OutputView = {
     Console.print(OUTPUT_MESSAGE.GREETING);
   },
 
-  printPreviewDetails(visitDate) {
+  printPreviewTitle(visitDate) {
     Console.print(OUTPUT_MESSAGE.BENEFIT_PREVIEW(visitDate));
   },
 
