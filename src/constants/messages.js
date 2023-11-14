@@ -18,7 +18,7 @@ export const RESULT_LIST = [
 ];
 
 export const OUTPUT_MESSAGE = Object.freeze({
-  GREETING: `안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.\n`,
+  GREETING: `안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.`,
   BENEFIT_PREVIEW: (date) =>
     `12월 ${date}일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!\n`,
   BADGE: (price) => {
@@ -37,22 +37,12 @@ export const OUTPUT_MESSAGE = Object.freeze({
     return EVENT_NONE;
   },
   RESULT_DETAILS: {
-    // orders = [ food1-count, food2-count, ... ];
-    ORDER_LIST: (orders) => {
-      let orderMessage = `\n<주문 메뉴>`;
-
-      orders.forEach((order) => {
-        const [food, count] = order.split('-');
-        orderMessage += `\n${food} ${count}개`;
-      });
-
-      return orderMessage;
-    },
-    TOTAL_ORDER_AMOUNT: '<할인 전 총주문 금액>\n',
+    ORDER_LIST: '<주문 메뉴>\n',
+    TOTAL_ORDER_AMOUNT: '<할인 전 총 주문금액>\n',
     GIFT_MENU: '\n<증정 메뉴>\n',
-    BENEFITS: '\n<혜택 내역>\n',
-    TOTAL_BENEFIT_AMOUNT: '\n<총혜택 금액>\n',
-    AMOUNT_AFTER_DISCOUNT: '\n<할인 후 예상 결제 금액>\n',
+    BENEFITS_LIST: '\n<혜택 내역>\n',
+    TOTAL_BENEFIT_AMOUNT: '<총 혜택 금액>\n',
+    AMOUNT_AFTER_DISCOUNT: '\n<할인 후 예상 결제금액>\n',
     EVENT_BADGE: '\n<12월 이벤트 배지>\n',
   },
 });
