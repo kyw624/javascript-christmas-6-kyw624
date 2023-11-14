@@ -1,4 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
+import { EOL as LINE_SEPARATOR } from 'os';
 
 import { EVENT_NONE } from './constants/events.js';
 import { MENU } from './constants/menu.js';
@@ -16,11 +17,11 @@ const {
 
 const OutputView = {
   printMenu(order) {
-    let menuResult = ``;
+    let menuResult = '';
 
     order.forEach((menu) => {
       const [food, count] = menu.split('-');
-      menuResult += `${food} ${count}개\n`;
+      menuResult += `${food} ${count}개${LINE_SEPARATOR}`;
     });
 
     Console.print(ORDER_LIST + menuResult);
@@ -42,7 +43,9 @@ const OutputView = {
     const isBenefits = benefits.length ? true : false;
     const benefitsResult = isBenefits
       ? benefits.reduce((result, { message, price }) => {
-          return result + `${message}${price.toLocaleString()}원\n`;
+          return (
+            result + `${message}${price.toLocaleString()}원${LINE_SEPARATOR}`
+          );
         }, '')
       : EVENT_NONE;
 
