@@ -7,6 +7,8 @@ import OutputView from './OutputView.js';
 import { OUTPUT_MESSAGE } from './constants/messages.js';
 
 const {
+  printGreeting,
+  printPreviewDetails,
   printMenu,
   printBeforeDiscountTotalAmount,
   printGift,
@@ -18,32 +20,28 @@ const {
 
 class App {
   async run() {
-    Console.print(OUTPUT_MESSAGE.GREETING);
-
+    printGreeting();
     const visitDate = await InputView.readDate();
     const orderList = await InputView.readOrder();
-
-    Console.print(OUTPUT_MESSAGE.BENEFIT_PREVIEW(visitDate));
+    printPreviewDetails(visitDate);
 
     const order = new Order(orderList);
-    order.getbeforeDiscountTotalAmount();
-
     const eventPlanner = new EventPlanner(visitDate, orderList);
-    eventPlanner.getEventsByDate();
-    eventPlanner.checkGiftEvent(order.beforeDiscountTotalAmount);
-    eventPlanner.getBadge();
+    eventPlanner.applyAllEvents(order);
 
     this.printResultDetails(order, eventPlanner);
   }
 
   printResultDetails(orderInstance, plannerInstance) {
     printMenu(orderInstance.orders);
-    printBeforeDiscountTotalAmount(orderInstance.beforeDiscountTotalAmount);
-    printGift(plannerInstance);
-    printBenefitsList(plannerInstance);
-    printTotalDiscountAmount(plannerInstance);
-    printFinalPaymentAmount(orderInstance, plannerInstance);
-    printEventBadge(plannerInstance);
+    printBeforeDiscountTotalAmount(
+      orderInstance.getBeforeDiscountTotalAmount()
+    );
+    printGift(plannerInstance.getIsGift());
+    printBenefitsList(plannerInstance.getBenefitsList());
+    printTotalDiscountAmount(orderInstance.getTotalDiscountAmount());
+    printFinalPaymentAmount(orderInstance.getFinalPaymentAmount());
+    printEventBadge(plannerInstance.eventBadge);
   }
 }
 

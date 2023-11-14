@@ -8,18 +8,46 @@ class Order {
     this.finalPaymentAmount = 0;
   }
 
-  getbeforeDiscountTotalAmount() {
+  getOrderList() {
+    return this.orders.reduce((orderList, order) => {
+      const [food, count] = order.split('-');
+      return orderList + `${food} ${count}개\n`;
+    }, '');
+  }
+
+  getBeforeDiscountTotalAmount() {
+    return this.beforeDiscountTotalAmount;
+  }
+
+  getTotalDiscountAmount() {
+    return this.totalDiscountAmount;
+  }
+
+  getFinalPaymentAmount() {
+    return this.finalPaymentAmount;
+  }
+
+  calculateBeforeDiscountTotalAmount() {
     this.orders.forEach((order) => {
       const [food, count] = order.split('-');
       this.beforeDiscountTotalAmount += MENU[food].price * count;
     });
   }
 
-  getOrderList() {
-    return this.orders.reduce((orderList, order) => {
-      const [food, count] = order.split('-');
-      return orderList + `${food} ${count}개\n`;
-    }, '');
+  calculateTotalDiscountAmount(benefits) {
+    const benefitsPrice = Object.values(benefits);
+
+    this.totalDiscountAmount = benefitsPrice.reduce(
+      (total, { _, price }) => total + price,
+      0
+    );
+  }
+
+  calculateFinalPaymentAmount(isGift) {
+    this.finalPaymentAmount =
+      this.beforeDiscountTotalAmount -
+      this.totalDiscountAmount +
+      (isGift ? MENU['샴페인'].price : 0);
   }
 }
 

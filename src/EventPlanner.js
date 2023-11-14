@@ -1,3 +1,5 @@
+import { EOL as LINE_SEPARATOR } from 'os';
+
 import { EVENTS, EVENT_BADGE, EVENT_NONE } from './constants/events.js';
 import { MENU } from './constants/menu.js';
 
@@ -7,7 +9,19 @@ class EventPlanner {
     this.orderList = menu;
     this.events = null;
     this.benefits = {};
+    this.isGift = false;
     this.eventBadge = null;
+  }
+
+  applyAllEvents(orderInstance) {
+    this.getEventsByDate();
+    orderInstance.calculateBeforeDiscountTotalAmount();
+
+    this.checkGiftEvent(orderInstance.beforeDiscountTotalAmount);
+    orderInstance.calculateTotalDiscountAmount(this.benefits);
+
+    this.getBadge(orderInstance.totalDiscountAmount);
+    orderInstance.calculateFinalPaymentAmount(this.isGift);
   }
 
   getEventsByDate() {
@@ -77,36 +91,47 @@ class EventPlanner {
     };
   }
 
-  checkGiftEvent(totalAmount) {
-    if (totalAmount >= 120000) {
+  checkGiftEvent(beforeDiscountTotalAmount) {
+    if (beforeDiscountTotalAmount >= 120000) {
       this.benefits['GIFT'] = {
         message: '증정 이벤트: -',
         price: MENU['샴페인'].price,
       };
+      this.isGift = true;
     }
   }
 
-  getTotalDiscountAmount() {
-    const benefits = Object.values(this.benefits);
-    return benefits.reduce((total, { _, price }) => total + price, 0);
-  }
-
-  getBadge() {
-    const totalBenefits = this.getTotalDiscountAmount();
-
+  getBadge(totalDiscountAmount) {
     this.eventBadge = EVENT_NONE;
 
-    if (totalBenefits >= 5000) {
+    if (totalDiscountAmount >= 5000) {
       this.eventBadge = EVENT_BADGE['STAR'];
     }
 
-    if (totalBenefits >= 10000) {
+    if (totalDiscountAmount >= 10000) {
       this.eventBadge = EVENT_BADGE['TREE'];
     }
 
-    if (totalBenefits >= 20000) {
+    if (totalDiscountAmount >= 20000) {
       this.eventBadge = EVENT_BADGE['SANTA'];
     }
+  }
+
+  getBenefitsList() {
+    const benefits = Object.values(this.benefits);
+    const isBenefits = benefits.length > 0 ? true : false;
+
+    return isBenefits
+      ? benefits.reduce((result, { message, price }) => {
+          return (
+            result + `${message}${price.toLocaleString()}원${LINE_SEPARATOR}`
+          );
+        }, '')
+      : EVENT_NONE + LINE_SEPARATOR;
+  }
+
+  getIsGift() {
+    return this.isGift;
   }
 }
 
