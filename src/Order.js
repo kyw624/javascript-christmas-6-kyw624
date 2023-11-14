@@ -3,13 +3,15 @@ import { MENU } from './constants/menu.js';
 class Order {
   constructor(order) {
     this.orders = order;
-    this.totalOrderAmount = 0;
+    this.beforeDiscountTotalAmount = 0;
+    this.totalDiscountAmount = 0;
+    this.finalPaymentAmount = 0;
   }
 
-  getTotalOrderAmount() {
+  getbeforeDiscountTotalAmount() {
     this.orders.forEach((order) => {
       const [food, count] = order.split('-');
-      this.totalOrderAmount += MENU[food].price * count;
+      this.beforeDiscountTotalAmount += MENU[food].price * count;
     });
   }
 
