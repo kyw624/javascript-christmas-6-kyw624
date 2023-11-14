@@ -1,4 +1,4 @@
-import { MENU } from '../constants/menu.js';
+import { CATEGORIES, MENU } from '../constants/menu.js';
 import { ERROR_MESSAGE } from '../constants/messages.js';
 
 const regExp = new RegExp(/^([가-힣]+-\d+,)*[가-힣]+-\d+$/);
@@ -22,8 +22,21 @@ export function validateMenu(order) {
   const menuBoard = Object.keys(MENU);
   const menuMap = new Map();
 
+  let isOnlyDrink = true;
+  let menuCount = 0;
+
   for (const menu of orderList) {
     const [food, count] = menu.split('-');
+
+    if (isOnlyDrink && MENU[food].category !== CATEGORIES['DRINK']) {
+      isOnlyDrink = false;
+    }
+
+    menuCount += Number(count);
+
+    if (menuCount > 20) {
+      throw new Error(ERROR_MESSAGE.MAX_ORDER_SIZE_EXCEEDED);
+    }
 
     if (!menuBoard.includes(food)) {
       throw new Error(ERROR_MESSAGE.ORDER);
@@ -38,5 +51,9 @@ export function validateMenu(order) {
     }
 
     menuMap.set(food, count);
+  }
+
+  if (isOnlyDrink) {
+    throw new Error(ERROR_MESSAGE.ONLY_DRINK_ORDER_NOT_ALLOWED);
   }
 }
