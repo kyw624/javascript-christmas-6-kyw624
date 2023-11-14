@@ -12,6 +12,13 @@ class Order {
       this.totalOrderAmount += MENU[food].price * count;
     });
   }
+
+  getOrderList() {
+    return this.orders.reduce((orderList, order) => {
+      const [food, count] = order.split('-');
+      return orderList + `${food} ${count}개\n`;
+    }, '');
+  }
 }
 
 export default Order;
