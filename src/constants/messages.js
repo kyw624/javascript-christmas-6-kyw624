@@ -38,11 +38,11 @@ export const OUTPUT_MESSAGE = Object.freeze({
   },
   RESULT_DETAILS: {
     ORDER_LIST: '<주문 메뉴>\n',
-    TOTAL_ORDER_AMOUNT: '<할인 전 총 주문금액>\n',
+    TOTAL_ORDER_AMOUNT: '<할인 전 총 주문 금액>\n',
     GIFT_MENU: '\n<증정 메뉴>\n',
     BENEFITS_LIST: '\n<혜택 내역>\n',
     TOTAL_BENEFIT_AMOUNT: '<총 혜택 금액>\n',
-    AMOUNT_AFTER_DISCOUNT: '\n<할인 후 예상 결제금액>\n',
+    AMOUNT_AFTER_DISCOUNT: '\n<할인 후 예상 결제 금액>\n',
     EVENT_BADGE: '\n<12월 이벤트 배지>\n',
   },
 });
