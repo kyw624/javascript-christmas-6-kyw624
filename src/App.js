@@ -1,10 +1,7 @@
-import { Console } from '@woowacourse/mission-utils';
-
 import Order from './Order.js';
 import EventPlanner from './EventPlanner.js';
 import InputView from './InputView.js';
 import OutputView from './OutputView.js';
-import { OUTPUT_MESSAGE } from './constants/messages.js';
 
 class App {
   async run() {

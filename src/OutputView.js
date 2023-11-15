@@ -2,7 +2,6 @@ import { Console } from '@woowacourse/mission-utils';
 import { EOL as LINE_SEPARATOR } from 'os';
 
 import { EVENT_NONE } from './constants/events.js';
-import { MENU } from './constants/menu.js';
 import { OUTPUT_MESSAGE } from './constants/messages.js';
 
 const OutputView = {
