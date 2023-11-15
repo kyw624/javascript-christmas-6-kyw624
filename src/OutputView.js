@@ -7,8 +7,8 @@ import { OUTPUT_MESSAGE } from './constants/messages.js';
 
 const OutputView = {
   printResultDetails(orderInstance, plannerInstance) {
-    this.printPreviewTitle(plannerInstance.visitDate);
-    this.printMenu(orderInstance.orders);
+    this.printPreviewTitle(plannerInstance.getVisitDate());
+    this.printMenu(orderInstance.getOrderList());
     this.printBeforeDiscountTotalAmount(
       orderInstance.getBeforeDiscountTotalAmount()
     );
@@ -22,7 +22,7 @@ const OutputView = {
       : orderInstance.getBeforeDiscountTotalAmount();
     this.printFinalPaymentAmount(finalPaymentAmount);
 
-    this.printEventBadge(EVENT_NONE || plannerInstance.eventBadge);
+    this.printEventBadge(plannerInstance.getEventBadge());
   },
 
   printGreeting() {
@@ -33,14 +33,7 @@ const OutputView = {
     Console.print(OUTPUT_MESSAGE.BENEFIT_PREVIEW(visitDate));
   },
 
-  printMenu(order) {
-    let menuResult = '';
-
-    order.forEach((menu) => {
-      const [food, count] = menu.split('-');
-      menuResult += `${food} ${count}개${LINE_SEPARATOR}`;
-    });
-
+  printMenu(menuResult) {
     Console.print(OUTPUT_MESSAGE.RESULT_DETAILS.ORDER_LIST + menuResult);
   },
 
