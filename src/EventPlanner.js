@@ -28,16 +28,16 @@ class EventPlanner {
       return;
     }
 
-    this.getEventsByDate();
+    this.setEventsByDate();
 
-    this.checkGiftEvent(orderInstance.getBeforeDiscountTotalAmount());
+    this.setGiftEvent(orderInstance.getBeforeDiscountTotalAmount());
     orderInstance.calculateTotalDiscountAmount(this.getBenefits());
 
     this.setEventBadge(orderInstance.getTotalDiscountAmount());
     orderInstance.calculateFinalPaymentAmount(this.getIsGift());
   }
 
-  getEventsByDate() {
+  setEventsByDate() {
     let events = [];
 
     if (this.#visitDate <= EVENTS['D-DAY'].MAX) {
@@ -104,7 +104,7 @@ class EventPlanner {
     };
   }
 
-  checkGiftEvent(beforeDiscountTotalAmount) {
+  setGiftEvent(beforeDiscountTotalAmount) {
     if (beforeDiscountTotalAmount >= 120000) {
       this.#benefits['GIFT'] = {
         message: '증정 이벤트: -',
