@@ -7,6 +7,7 @@ import { OUTPUT_MESSAGE } from './constants/messages.js';
 
 const OutputView = {
   printResultDetails(orderInstance, plannerInstance) {
+    this.printPreviewTitle(plannerInstance.visitDate);
     this.printMenu(orderInstance.orders);
     this.printBeforeDiscountTotalAmount(
       orderInstance.getBeforeDiscountTotalAmount()

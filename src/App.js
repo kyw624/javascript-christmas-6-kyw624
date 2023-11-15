@@ -9,12 +9,13 @@ import { OUTPUT_MESSAGE } from './constants/messages.js';
 class App {
   async run() {
     OutputView.printGreeting();
+
     const visitDate = await InputView.readDate();
     const orderList = await InputView.readOrder();
-    OutputView.printPreviewTitle(visitDate);
 
     const order = new Order(orderList);
     const eventPlanner = new EventPlanner(visitDate, orderList);
+
     eventPlanner.applyAllEvents(order);
 
     OutputView.printResultDetails(order, eventPlanner);
