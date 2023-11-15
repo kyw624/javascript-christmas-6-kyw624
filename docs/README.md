@@ -34,12 +34,12 @@
 2. 혜택받은 정보들을 반환하는 메서드 보유
 
 - `applyAllEvents()`: 적용 가능한 이벤트를 찾아 주문서를 업데이트
-- `getEventsByDate()`: 방문 날짜에 맞는 이벤트를 적용
+- `setEventsByDate()`: 방문 날짜에 맞는 이벤트를 적용
 - `getDayType()`: 방문 날짜가 평일인지 주말인지 판별
 - `discountDday()`: 크리스마스 디데이 할인
 - `discountWeekly()`: 평일/주말 할인
 - `discountSpecialDate()`: 특별 할인
-- `checkGiftEvent()`: 할인 전 총 주문 금액을 받아 증정 이벤트 적용
+- `setGiftEvent()`: 할인 전 총 주문 금액을 받아 증정 이벤트 적용
 - `setEventBadge()`: 총 혜택 금액을 받아 이벤트 뱃지를 적용
 - `getBenefitsList()`: 받은 모든 혜택을 문자열로 가공해 반환
 
