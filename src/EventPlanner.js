@@ -4,39 +4,51 @@ import { EVENTS, EVENT_BADGE, EVENT_NONE } from './constants/events.js';
 import { MENU } from './constants/menu.js';
 
 class EventPlanner {
+  #visitDate;
+  #orderList;
+  #events;
+  #benefits;
+  #isGift;
+  #eventBadge;
+
   constructor(date, menu) {
-    this.visitDate = date;
-    this.orderList = menu;
-    this.events = null;
-    this.benefits = {};
-    this.isGift = false;
-    this.eventBadge = null;
+    this.#visitDate = date;
+    this.#orderList = menu;
+    this.#events = null;
+    this.#benefits = {};
+    this.#isGift = false;
+    this.#eventBadge = null;
+  }
+
+  getVisitDate() {
+    return this.#visitDate;
   }
 
   getIsAppliedEvents() {
-    return this.events === null ? false : true;
+    return this.#events === null ? false : true;
   }
 
   applyAllEvents(orderInstance) {
     orderInstance.calculateBeforeDiscountTotalAmount();
 
     if (orderInstance.getBeforeDiscountTotalAmount() < 10000) {
+      this.setEventBadge(0);
       return;
     }
 
     this.getEventsByDate();
 
-    this.checkGiftEvent(orderInstance.beforeDiscountTotalAmount);
-    orderInstance.calculateTotalDiscountAmount(this.benefits);
+    this.checkGiftEvent(orderInstance.getBeforeDiscountTotalAmount());
+    orderInstance.calculateTotalDiscountAmount(this.getBenefits());
 
-    this.getBadge(orderInstance.totalDiscountAmount);
-    orderInstance.calculateFinalPaymentAmount(this.isGift);
+    this.setEventBadge(orderInstance.getTotalDiscountAmount());
+    orderInstance.calculateFinalPaymentAmount(this.getIsGift());
   }
 
   getEventsByDate() {
     let events = [];
 
-    if (this.visitDate <= EVENTS['D-DAY'].MAX) {
+    if (this.#visitDate <= EVENTS['D-DAY'].MAX) {
       events.push(EVENTS['D-DAY'].NAME);
       this.discountDday();
     }
@@ -45,16 +57,16 @@ class EventPlanner {
     events.push(EVENTS[dayType].NAME);
     this.discountWeekly(dayType);
 
-    if (EVENTS['SPECIAL'].DATE.includes(this.visitDate)) {
+    if (EVENTS['SPECIAL'].DATE.includes(this.#visitDate)) {
       events.push(EVENTS['SPECIAL'].NAME);
       this.discountSpecialDate();
     }
 
-    this.events = events || [];
+    this.#events = events || [];
   }
 
   getDayType() {
-    const currentDate = new Date(`2023-12-${this.visitDate}`);
+    const currentDate = new Date(`2023-12-${this.#visitDate}`);
     const currentDay = currentDate.getDay();
 
     if (EVENTS['WEEKEND'].DAY.includes(currentDay)) {
@@ -65,16 +77,16 @@ class EventPlanner {
   }
 
   discountDday() {
-    this.benefits['D-DAY'] = {
+    this.#benefits['D-DAY'] = {
       message: '크리스마스 디데이 할인: -',
-      price: EVENTS['D-DAY'].DEFAULT + (this.visitDate - 1) * 100,
+      price: EVENTS['D-DAY'].DEFAULT + (this.#visitDate - 1) * 100,
     };
   }
 
   discountWeekly(dayType) {
     const prefix = dayType === 'WEEKDAY' ? '평일' : '주말';
     const discountedCategory = EVENTS[dayType].TARGET;
-    const discountedCount = this.orderList.reduce((total, order) => {
+    const discountedCount = this.#orderList.reduce((total, order) => {
       const [food, count] = order.split('-');
 
       if (MENU[food].category === discountedCategory) {
@@ -87,14 +99,14 @@ class EventPlanner {
       return;
     }
 
-    this.benefits[dayType] = {
+    this.#benefits[dayType] = {
       message: `${prefix} 할인: -`,
       price: discountedCount * 2023,
     };
   }
 
   discountSpecialDate() {
-    this.benefits['SPECIAL'] = {
+    this.#benefits['SPECIAL'] = {
       message: '특별 할인: -',
       price: 1000,
     };
@@ -102,45 +114,53 @@ class EventPlanner {
 
   checkGiftEvent(beforeDiscountTotalAmount) {
     if (beforeDiscountTotalAmount >= 120000) {
-      this.benefits['GIFT'] = {
+      this.#benefits['GIFT'] = {
         message: '증정 이벤트: -',
         price: MENU['샴페인'].price,
       };
-      this.isGift = true;
+      this.#isGift = true;
     }
   }
 
-  getBadge(totalDiscountAmount) {
-    this.eventBadge = EVENT_NONE;
+  setEventBadge(totalDiscountAmount) {
+    this.#eventBadge = EVENT_NONE;
 
     if (totalDiscountAmount >= 5000) {
-      this.eventBadge = EVENT_BADGE['STAR'];
+      this.#eventBadge = EVENT_BADGE['STAR'];
     }
 
     if (totalDiscountAmount >= 10000) {
-      this.eventBadge = EVENT_BADGE['TREE'];
+      this.#eventBadge = EVENT_BADGE['TREE'];
     }
 
     if (totalDiscountAmount >= 20000) {
-      this.eventBadge = EVENT_BADGE['SANTA'];
+      this.#eventBadge = EVENT_BADGE['SANTA'];
     }
   }
 
   getBenefitsList() {
-    const benefits = Object.values(this.benefits);
+    const benefits = Object.values(this.#benefits);
     const isBenefits = benefits.length > 0 ? true : false;
 
     return isBenefits
       ? benefits.reduce((result, { message, price }) => {
           return (
-            result + `${message}${price.toLocaleString()}원${LINE_SEPARATOR}`
+            result + `${message}${price.toLocaleString()}원` + LINE_SEPARATOR
           );
         }, '')
       : EVENT_NONE + LINE_SEPARATOR;
   }
 
+  getBenefits() {
+    return this.#benefits;
+  }
+
   getIsGift() {
-    return this.isGift;
+    return this.#isGift;
+  }
+
+  getEventBadge() {
+    return this.#eventBadge;
   }
 }
 
