@@ -1,6 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
 
-import App from '../src/App.js';
 import { validateVisitDate, validateMenu } from '../src/utils/validateInput.js';
 import { MENU, CATEGORIES } from '../src/constants/menu.js';
 import { ERROR_MESSAGE } from '../src/constants/messages.js';
