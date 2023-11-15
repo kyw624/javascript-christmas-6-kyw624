@@ -20,14 +20,6 @@ class EventPlanner {
     this.#eventBadge = null;
   }
 
-  getVisitDate() {
-    return this.#visitDate;
-  }
-
-  getIsAppliedEvents() {
-    return this.#events === null ? false : true;
-  }
-
   applyAllEvents(orderInstance) {
     orderInstance.calculateBeforeDiscountTotalAmount();
 
@@ -149,6 +141,14 @@ class EventPlanner {
           );
         }, '')
       : EVENT_NONE + LINE_SEPARATOR;
+  }
+
+  getVisitDate() {
+    return this.#visitDate;
+  }
+
+  getIsAppliedEvents() {
+    return this.#events === null ? false : true;
   }
 
   getBenefits() {
