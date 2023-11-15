@@ -1,8 +1,6 @@
 import { CATEGORIES, MENU } from '../constants/menu.js';
 import { ERROR_MESSAGE } from '../constants/messages.js';
 
-const regExp = new RegExp(/^([가-힣]+-\d+,)*[가-힣]+-\d+$/);
-
 export function validateVisitDate(date) {
   if (isNaN(date)) {
     throw new Error(ERROR_MESSAGE.DATE);
@@ -12,6 +10,8 @@ export function validateVisitDate(date) {
     throw new Error(ERROR_MESSAGE.DATE);
   }
 }
+
+const regExp = new RegExp(/^([가-힣]+-\d+,)*[가-힣]+-\d+$/);
 
 export function validateMenu(order) {
   if (!regExp.test(order)) {
@@ -42,7 +42,7 @@ export function validateMenu(order) {
       throw new Error(ERROR_MESSAGE.ORDER);
     }
 
-    if (isNaN(count) || count < 1) {
+    if (count < 1) {
       throw new Error(ERROR_MESSAGE.ORDER);
     }
 
