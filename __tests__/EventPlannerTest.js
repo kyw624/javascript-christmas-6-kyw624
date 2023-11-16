@@ -8,9 +8,21 @@ test('EventPlanner 객체 생성 테스트', () => {
   ];
 
   inputs.forEach((input) => {
-    const eventPlanner = new EventPlanner(input[0], ...input);
+    const eventPlanner = new EventPlanner(...input);
 
     expect(eventPlanner).toBeInstanceOf(EventPlanner);
     expect(eventPlanner.getVisitDate()).toBe(input[0]);
+  });
+});
+
+describe('기능 테스트', () => {
+  test('10000원 이하는 이벤트 미적용', async () => {
+    const input = ['3', ['제로콜라-1', '아이스크림-1']];
+    const order = new Order(input[1]);
+    const eventPlanner = new EventPlanner(...input);
+
+    eventPlanner.applyAllEvents(order);
+
+    expect(eventPlanner.getIsAppliedEvents()).toBe(false);
   });
 });
